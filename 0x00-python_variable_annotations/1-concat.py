@@ -3,5 +3,5 @@
 
 
 def concat(str1: str, str2: str) -> str:
-   """Represents class concat"""
+    """Represents class concat"""
     return str1 + str2
