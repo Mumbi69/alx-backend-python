@@ -5,4 +5,3 @@
 def add(a: float, b: float) -> float:
     """Represents class add"""
     return a + b
-
