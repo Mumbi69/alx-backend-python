@@ -39,9 +39,9 @@ class TestGithubOrgClient(TestCase):
     def test_public_repos(self, mocked_get_json):
         """This function tests the public_repos method of GithubOrgClient."""
         test_payload = [
-                {'name': 'name1'},
-                {'name': 'name2'}
-                ]
+            {'name': 'name1'},
+            {'name': 'name2'}
+        ]
         mocked_get_json.return_value = test_payload
         with patch('client.GithubOrgClient._public_repos_url',
                    new_callable=PropertyMock) as mocked_property:
@@ -55,7 +55,7 @@ class TestGithubOrgClient(TestCase):
          "my_license", True),
         ({"name": "repo2", "license": {"key": "other_license"}},
          "my_license", False)
-        ])
+    ])
     def test_has_license(self, repo, licence, expected):
         """
         This function tests the has_license
@@ -88,9 +88,9 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
             return mock_response
         cls.get_patcher = patch('requests.get', side_effect=side)
         cls.org_patcher = patch(
-                'client.GithubOrgClient.org',
-                new_callable=PropertyMock,
-                return_value=cls.org_payload)
+            'client.GithubOrgClient.org',
+            new_callable=PropertyMock,
+            return_value=cls.org_payload)
         cls.get_patcher.start()
         cls.org_patcher.start()
 
