@@ -24,7 +24,10 @@ class TestGithubOrgClient(TestCase):
 
     @patch('client.GithubOrgClient.org', return_value={"repos_url": 'url'})
     def test_public_repos_url(self, mocked_org):
-        """This function tests the _public_repos_url property of GithubOrgClient."""
+        """
+        This function tests the _public_repos_url
+        property of GithubOrgClient.
+        """
         inst = GithubOrgClient('random org url')
         with patch('client.GithubOrgClient._public_repos_url',
                    new_callable=PropertyMock) as mocked_property:
@@ -54,20 +57,27 @@ class TestGithubOrgClient(TestCase):
          "my_license", False)
         ])
     def test_has_license(self, repo, licence, expected):
-        """This function tests the has_license static method of GithubOrgClient."""
+        """
+        This function tests the has_license
+        static method of GithubOrgClient.
+        """
         self.assertEqual(GithubOrgClient.has_license(repo, licence), expected)
 
 
 @parameterized_class(('org_payload', 'repos_payload',
                       'expected_repos', 'apache2_repos'), TEST_PAYLOAD)
 class TestIntegrationGithubOrgClient(unittest.TestCase):
-    """This class contains integration test cases for the GithubOrgClient class."""
+    """
+    This class contains integration test cases for
+    the GithubOrgClient class."""
 
     @classmethod
     def setUpClass(cls):
         """This function sets up the class for integration testing."""
         def side(url):
-            """This function is the side effect function for requests.get mock."""
+            """
+            This function is the side effect
+            function for requests.get mock."""
             repo = []
             mock_response = Mock()
             for payload in TEST_PAYLOAD:
@@ -91,12 +101,16 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.org_patcher.stop()
 
     def test_public_repos(self):
-        """This function tests the public_repos method without specifying a license."""
+        """
+        This function tests the public_repos method
+        without specifying a license."""
         inst = GithubOrgClient('google/repos')
         self.assertEqual(inst.public_repos(), self.expected_repos)
 
     def test_public_repos_with_license(self):
-        """This function tests the public_repos method with a specified license."""
+        """
+        This function tests the public_repos
+        method with a specified license."""
         inst = GithubOrgClient('google/repos')
         self.assertEqual(inst.public_repos(license="apache-2.0"),
                          self.apache2_repos)
